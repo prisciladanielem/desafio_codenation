@@ -56,8 +56,8 @@ def sendAnswer(file, url):
 
 if __name__ == "__main__":
     file = 'answer.json'
-    url_request = 'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=fb7ba5effdc7e776af83ed8ee9bd214d7d9ddd7e'
-    url_submit = 'https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=fb7ba5effdc7e776af83ed8ee9bd214d7d9ddd7e'
+    url_request = 'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=TOKEN'
+    url_submit = 'https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=TOKEN'
     request(file, url_request)
     decode(file)
     sendAnswer(file, url_submit)
