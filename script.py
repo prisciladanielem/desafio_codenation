@@ -37,27 +37,26 @@ def decode(file):
             text_decoded = text_decoded + letter # Mantém caracteres que não estão na variável alphabet
 
     #Guarda no dicionário a frase decodificada
-    answer['decifrado'] = text_decoded 
+    answer['decifrado'] = text_decoded
     answer['resumo_criptografico'] = hashlib.sha1(answer['decifrado'].encode('utf-8')).hexdigest() # Biblioteca hashlib (hash) criptografa o texto decifrado
     #Atualiza o arquivo json com o texto decifrado
     updateJson(file,answer)
 
-    print('texto ',text_decoded)
-    print(answer['resumo_criptografico'])
+    # print('texto ',text_decoded)
+    # print(answer['resumo_criptografico'])
 
 #Função para enviar uma request post multipart
-def sendAnswer(file, url):
-    u = url
-    answer = {'answer': open(file, 'rb')}
+def sendAnswer(file):
+    url = 'https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=fb7ba5effdc7e776af83ed8ee9bd214d7d9ddd7e'
+    answers = {'answer': open(file, 'rb')}
 
-    r = requests.post(u, answer=answer)
+    r = requests.post(url=url, files=answers)
     print(r.text)
     print(r.status_code)
 
 if __name__ == "__main__":
     file = 'answer.json'
-    url_request = 'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=TOKEN'
-    url_submit = 'https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=TOKEN'
+    url_request = 'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=fb7ba5effdc7e776af83ed8ee9bd214d7d9ddd7e'
     request(file, url_request)
     decode(file)
-    sendAnswer(file, url_submit)
+    sendAnswer(file)
